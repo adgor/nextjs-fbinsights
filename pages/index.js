@@ -46,5 +46,6 @@ export async function getStaticProps() {
         link: post.link,
       })),
     },
+    revalidate: 1800,
   };
 }
