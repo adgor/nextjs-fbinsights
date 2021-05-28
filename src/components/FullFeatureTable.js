@@ -1,6 +1,12 @@
 import React, { useMemo } from "react";
-import { useTable, usePagination } from "react-table";
+import {
+  useTable,
+  useSortBy,
+  useGlobalFilter,
+  usePagination,
+} from "react-table";
 import { COLUMNS } from "./columns";
+import { GlobalFilter } from "./GlobalFilter";
 import {
   ChevronLeftIcon,
   ChevronDoubleLeftIcon,
@@ -8,17 +14,9 @@ import {
   ChevronDoubleRightIcon,
 } from "@heroicons/react/solid";
 
-export const PaginationTable = ({ posts }) => {
+export const FullFeatureTable = ({ posts }) => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => posts, []);
-
-  const tableInstance = useTable(
-    {
-      columns,
-      data,
-    },
-    usePagination
-  );
 
   const {
     getTableProps,
@@ -33,16 +31,26 @@ export const PaginationTable = ({ posts }) => {
     gotoPage,
     pageCount,
     setPageSize,
-    state,
     prepareRow,
-  } = tableInstance;
+    state,
+    setGlobalFilter,
+  } = useTable(
+    {
+      columns,
+      data,
+    },
+    useGlobalFilter,
+    useSortBy,
+    usePagination
+  );
 
-  const { pageIndex, pageSize } = state;
+  const { globalFilter, pageIndex, pageSize } = state;
 
   return (
     <div className="flex flex-col mt-16">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
           <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
             <table
               {...getTableProps()}
@@ -57,9 +65,18 @@ export const PaginationTable = ({ posts }) => {
                     {headerGroup.headers.map((column) => (
                       <th
                         className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-                        {...column.getHeaderProps()}
+                        {...column.getHeaderProps(
+                          column.getSortByToggleProps()
+                        )}
                       >
                         {column.render("Header")}
+                        <span>
+                          {column.isSorted
+                            ? column.isSortedDesc
+                              ? " 🔽"
+                              : " 🔼"
+                            : ""}
+                        </span>
                       </th>
                     ))}
                   </tr>
@@ -89,25 +106,8 @@ export const PaginationTable = ({ posts }) => {
               </tbody>
             </table>
           </div>
-
-          <div className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6">
-            <div className="flex justify-between flex-1 sm:hidden">
-              <a
-                onClick={() => previousPage()}
-                disabled={!canPreviousPage}
-                className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md cursor-pointer disabled:opacity-50 hover:bg-gray-50"
-              >
-                Previous
-              </a>
-              <a
-                onClick={() => nextPage()}
-                disabled={!canNextPage}
-                className="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md cursor-pointer disabled:opacity-50 hover:bg-gray-50"
-              >
-                Next
-              </a>
-            </div>
-            <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+          <div className="flex items-center justify-between py-3 bg-white border-t border-gray-200 ">
+            <div className="sm:flex-1 sm:flex sm:items-center sm:justify-between">
               <div>
                 <nav
                   className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"

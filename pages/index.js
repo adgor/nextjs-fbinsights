@@ -1,31 +1,27 @@
 import { MongoClient } from "mongodb";
-// import Example from "../src/components/example";
-// import styles from "../styles/Home.module.css";
 
-import { PaginationTable } from "../src/components/PaginationTable";
+import { FullFeatureTable } from "../src/components/FullFeatureTable";
+// import { PaginationTable } from "../src/components/PaginationTable";
 // import { SortingFilteringTable } from "../src/components/SortingFilteringTable";
 // import FilteringTable from "../src/components/FilteringTable";
 // import SortingTable from "../src/components/SortingTable";
 // import BasicTable from "../src/components/BasicTable";
 
 export default function Home({ posts }) {
-  // console.log(props);
+  // console.log(posts);
   return (
-    <div>
-      <main className="container mx-auto">
-        <h1 className="block p-5 text-5xl text-center bg-red-300">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+    <main className="container px-5 py-14 mx-auto">
+      <h1 className="text-4xl italic tracking-tight text-center uppercase font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+        <span className=" text-indigo-600 ">fb</span>insights
+      </h1>
 
-        <PaginationTable posts={posts} />
-        {/* <SortingFilteringTable posts={posts} /> */}
-        {/* <FilteringTable posts={posts} /> */}
-        {/* <SortingTable posts={posts} /> */}
-        {/* <BasicTable posts={posts} /> */}
-      </main>
-      {/* punon  */}
-      {/* <Example posts={props.posts} /> */}
-    </div>
+      <FullFeatureTable posts={posts} />
+      {/* <PaginationTable posts={posts} /> */}
+      {/* <SortingFilteringTable posts={posts} /> */}
+      {/* <FilteringTable posts={posts} /> */}
+      {/* <SortingTable posts={posts} /> */}
+      {/* <BasicTable posts={posts} /> */}
+    </main>
   );
 }
 

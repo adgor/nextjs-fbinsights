@@ -45,6 +45,7 @@ export const COLUMNS = [
       <a
         className="font-medium text-blue-600 hover:text-indigo-900 visited:text-purple-900 "
         href={e.value}
+        target="_blank"
       >
         {" "}
         Shiko{" "}
