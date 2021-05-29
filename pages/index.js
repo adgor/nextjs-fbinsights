@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+import Head from "next/head";
 import { MongoClient } from "mongodb";
 
 import { FullFeatureTable } from "../src/components/FullFeatureTable";
@@ -10,18 +12,24 @@ import { FullFeatureTable } from "../src/components/FullFeatureTable";
 export default function Home({ posts }) {
   // console.log(posts);
   return (
-    <main className="container px-5 mx-auto py-14">
-      <h1 className="text-4xl italic font-extrabold tracking-tight text-center text-gray-900 uppercase sm:text-5xl md:text-6xl">
-        <span className="text-indigo-600 ">fb</span>insights
-      </h1>
+    <Fragment>
+      <Head>
+        <title>FBINSIGHTS</title>
+      </Head>
 
-      <FullFeatureTable posts={posts} />
-      {/* <PaginationTable posts={posts} /> */}
-      {/* <SortingFilteringTable posts={posts} /> */}
-      {/* <FilteringTable posts={posts} /> */}
-      {/* <SortingTable posts={posts} /> */}
-      {/* <BasicTable posts={posts} /> */}
-    </main>
+      <main className="container px-5 mx-auto py-14">
+        <h1 className="text-4xl italic font-extrabold tracking-tight text-center text-gray-900 uppercase sm:text-5xl md:text-6xl">
+          <span className="text-indigo-600 ">fb</span>insights
+        </h1>
+
+        <FullFeatureTable posts={posts} />
+        {/* <PaginationTable posts={posts} /> */}
+        {/* <SortingFilteringTable posts={posts} /> */}
+        {/* <FilteringTable posts={posts} /> */}
+        {/* <SortingTable posts={posts} /> */}
+        {/* <BasicTable posts={posts} /> */}
+      </main>
+    </Fragment>
   );
 }
 
