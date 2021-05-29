@@ -10,9 +10,9 @@ import { FullFeatureTable } from "../src/components/FullFeatureTable";
 export default function Home({ posts }) {
   // console.log(posts);
   return (
-    <main className="container px-5 py-14 mx-auto">
-      <h1 className="text-4xl italic tracking-tight text-center uppercase font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-        <span className=" text-indigo-600 ">fb</span>insights
+    <main className="container px-5 mx-auto py-14">
+      <h1 className="text-4xl italic font-extrabold tracking-tight text-center text-gray-900 uppercase sm:text-5xl md:text-6xl">
+        <span className="text-indigo-600 ">fb</span>insights
       </h1>
 
       <FullFeatureTable posts={posts} />
@@ -41,7 +41,7 @@ export async function getStaticProps() {
         like: post.like,
         comment: post.comment,
         shares: post.shares,
-        ptime: post.ptime,
+        ptime: post.converted_time.toString(),
         stime: post.stime,
         link: post.link,
       })),
