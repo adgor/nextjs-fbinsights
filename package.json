@@ -1,6 +1,7 @@
 {
-  "name": "nextjs-fbinsights",
-  "version": "0.1.0",
+  "name": "fbinsights",
+  "version": "1.0.2",
+  "author": "ad-docs",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -1,8 +1,10 @@
 import { Fragment } from "react";
 import Head from "next/head";
 import { connectToDatabase } from "../utils/mongodb";
+import { useRouter } from "next/router";
 
 import { FullFeatureTable } from "../src/components/FullFeatureTable";
+import Modal from "../src/components/Modal";
 // import { PaginationTable } from "../src/components/PaginationTable";
 // import { SortingFilteringTable } from "../src/components/SortingFilteringTable";
 // import FilteringTable from "../src/components/FilteringTable";
@@ -11,6 +13,13 @@ import { FullFeatureTable } from "../src/components/FullFeatureTable";
 
 export default function Home({ posts }) {
   // console.log(posts);
+  const router = useRouter();
+  const deleteAllPosts = () => {
+    fetch("http://localhost:3000/api/deleteall");
+
+    router.push("/");
+  };
+
   return (
     <Fragment>
       <Head>
@@ -28,6 +37,8 @@ export default function Home({ posts }) {
         {/* <FilteringTable posts={posts} /> */}
         {/* <SortingTable posts={posts} /> */}
         {/* <BasicTable posts={posts} /> */}
+
+        <Modal deletePosts={() => deleteAllPosts()} />
       </main>
     </Fragment>
   );

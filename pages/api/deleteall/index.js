@@ -5,7 +5,8 @@ export default async function handler(req, res) {
 
   const data = req.query;
 
-  // const response = await db.collection("test1").insertOne(data);
+  // const response =
+  await db.collection("test").deleteMany(data);
 
-  res.json(response);
+  res.json({ msg: "All posts has been deleted" });
 }
