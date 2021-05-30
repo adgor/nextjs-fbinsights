@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import Head from "next/head";
-import { MongoClient } from "mongodb";
+import { connectToDatabase } from "../utils/mongodb";
 
 import { FullFeatureTable } from "../src/components/FullFeatureTable";
 // import { PaginationTable } from "../src/components/PaginationTable";
@@ -34,17 +34,12 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    "mongodb+srv://rap:kiki321123@cluster0.1fub5.mongodb.net/test",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  );
-  const db = client.db();
+  const { db } = await connectToDatabase();
+
   const postsCollection = db.collection("test");
+
   const posts = await postsCollection.find().toArray();
-  client.close();
+
   return {
     props: {
       posts: posts.map((post) => ({
