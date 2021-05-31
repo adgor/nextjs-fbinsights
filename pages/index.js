@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import Head from "next/head";
 import { connectToDatabase } from "../utils/mongodb";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 import { FullFeatureTable } from "../src/components/FullFeatureTable";
 import Modal from "../src/components/Modal";
@@ -13,11 +13,11 @@ import Modal from "../src/components/Modal";
 
 export default function Home({ posts }) {
   // console.log(posts);
-  // const router = useRouter();
+  const router = useRouter();
   const deleteAllPosts = () => {
     fetch("/api/deleteall");
 
-    // router.push("/");
+    router.push("/");
   };
 
   return (
