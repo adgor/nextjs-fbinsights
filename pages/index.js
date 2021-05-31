@@ -15,7 +15,7 @@ export default function Home({ posts }) {
   // console.log(posts);
   // const router = useRouter();
   const deleteAllPosts = () => {
-    fetch("http://localhost:3000/api/deleteall");
+    fetch("/api/deleteall");
 
     // router.push("/");
   };
