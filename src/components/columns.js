@@ -1,5 +1,3 @@
-import { format } from "date-fns";
-
 export const COLUMNS = [
   {
     Header: "FAN PAGE",
@@ -32,9 +30,6 @@ export const COLUMNS = [
   {
     Header: "DATA",
     accessor: "ptime",
-    Cell: ({ value }) => {
-      return format(new Date(value), "dd/MMM/yyyy HH:mm:ss");
-    },
   },
   {
     Header: "",

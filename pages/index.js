@@ -59,7 +59,7 @@ export async function getStaticProps() {
         like: post.like,
         comment: post.comment,
         shares: post.shares,
-        ptime: post.converted_time.toString(),
+        ptime: post.ptime,
         stime: post.stime,
         link: post.link,
       })),
